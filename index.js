@@ -28,8 +28,8 @@ server.use('*', (req, res, next) => {
 
 // Routes
 let userRoutes = require('./server/routes/users')
-server.use('/api/users', userRoutes)
 let logRoutes = require('./server/routes/logs')
+server.use('/api/users', userRoutes)
 server.use('/api/logs', logRoutes)
 // let commentRoutes = require('./server/routes/comments')
 

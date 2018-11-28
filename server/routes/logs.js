@@ -1,10 +1,11 @@
 let router = require('express').Router()
 let Logs = require('../models/log')
+let Author = require('../models/user')
 
 
 
 //Get all logs
-router.get('/api/logs', (req, res, next) => {
+router.get('', (req, res, next) => {
   Logs.find({})
     .then(logs => {
       res.send(logs)
@@ -13,19 +14,27 @@ router.get('/api/logs', (req, res, next) => {
       res.status(400).send(err)
     })
 })
+//Get all logs by author
+router.get('/:authorid', (req, res, next) => {
+  Author.findById(req.params.authorid)
+    .then(author => {
+      Logs.find({ author: author._id })
+        .then(logs => {
+          return res.send({ author, logs })
+        })
+    })
+    .catch(next)
+})
+
 //Create new Log
-router.post('/api/logs', (req, res, next) => {
+router.post('', (req, res, next) => {
   req.body.author = req.session.uid
   Logs.create(req.body)
-    .then(newLog => {
-      res.send(newLog)
-    })
-    .catch(err => {
-      res.status(400).send(err)
-    })
+    .then(log => res.send(log))
+    .catch(next)
 })
 //Delete log
-router.delete('/api/logs/:logid', (req, res, next) => {
+router.delete('/:logid', (req, res, next) => {
   Logs.findById(req.params.logid)
     .then(log => {
       if (log.author != req.session.uid) {
