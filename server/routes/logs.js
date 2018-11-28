@@ -20,6 +20,9 @@ router.get('/:authorid', (req, res, next) => {
     .then(author => {
       Logs.find({ author: author._id })
         .then(logs => {
+          logs.forEach(l => {
+            l.author = author
+          })
           return res.send({ author, logs })
         })
     })

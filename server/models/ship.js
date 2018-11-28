@@ -1,13 +1,13 @@
 let mongoose = require('mongoose')
-let bcrypt = require('bcryptjs')
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
-let name = 'Comment'
+let name = 'Ship'
+
 
 let schema = new Schema({
-  author: { type: ObjectId, ref: 'User', required: true },
-  log: { type: ObjectId, ref: 'Log' },
-  text: { type: String }
+  name: { type: String, required: true },
+  imgurl: { type: String, required: true },
+  users: [{ type: ObjectId, ref: 'User' }]
 })
 
 module.exports = mongoose.model(name, schema)

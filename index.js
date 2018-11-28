@@ -28,9 +28,12 @@ server.use('*', (req, res, next) => {
 
 // Routes
 let userRoutes = require('./server/routes/users')
+let shipRoutes = require('./server/routes/ships')
 let logRoutes = require('./server/routes/logs')
+server.use('/api/ships', shipRoutes)
 server.use('/api/users', userRoutes)
 server.use('/api/logs', logRoutes)
+
 // let commentRoutes = require('./server/routes/comments')
 
 

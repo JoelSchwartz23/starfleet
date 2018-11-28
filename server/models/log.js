@@ -7,8 +7,8 @@ let name = 'Log'
 let schema = new Schema({
   text: { type: String },
   author: { type: ObjectId, ref: 'User' },
-  date: { type: Number },
-  ship: { type: String }
+  date: { type: Number }
+  // ship: { type: String }
 })
 
 module.exports = mongoose.model(name, schema)
